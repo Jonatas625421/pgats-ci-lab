@@ -15,9 +15,6 @@ jobs:
       - name: Instalando Yarn
         run: npm install -g yarn
 
-      - name: Instalando dependências
-        run: yarn
-
       - name: Checando padronização do código
         run: npx eslint .
 
@@ -30,9 +27,6 @@ jobs:
 
       - name: Instalando Yarn
         run: npm install -g yarn
-
-      - name: Instalando dependências
-        run: yarn
 
       - name: Executando testes de unidade
         run: yarn test
