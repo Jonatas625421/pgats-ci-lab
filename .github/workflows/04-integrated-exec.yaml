@@ -16,65 +16,60 @@ jobs:
         run: npm install -g yarn
 
       - name: Instalando dependências
-        run: yarn 
+        run: yarn
 
-      - name: Checando padronizacao do código
-        run: yarn lint    
-  
-  unidade:    
+      - name: Checando padronização do código
+        run: yarn lint
+
+  unidade:
     runs-on: ubuntu-latest
+    needs: inspecao
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Instalando Yarn
-        run: npm install -g Yarn
+        run: npm install -g yarn
 
       - name: Instalando dependências
-        run: Yarn
+        run: yarn
 
       - name: Executando testes de unidade
         run: yarn test
- 
+
   e2e-tests:
-   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    needs: unidade
 
-   steps: 
-    # clone do projeto
-    - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-    # instalação do node
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 22.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
 
-    # instalação do Yarn
-    - name: Instalando Yarn
-      run: npm install -g yarn
-      
-    # instalação das dependências
-    -  name: Instalando dependências
-       run: yarn
-      
-    # instalação do Playwright
-    - name: Instalando Playwright
-      run: yarn playwright install
-      
-    # executar os testes e2e
-    - name: Executando Testes E2E
-      run: yarn run e2e
+      - name: Instalando Yarn
+        run: npm install -g yarn
 
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: relatorio
-        path: ./playwright-report
+      - name: Instalando dependências
+        run: yarn
 
-  deploy: 
-     runs-on: ubuntu-latest
+      - name: Instalando Playwright
+        run: yarn playwright install
 
-     steps:
+      - name: Executando Testes E2E
+        run: yarn run e2e
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: relatorio
+          path: ./playwright-report
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+
+    steps:
       - name: Simulação do Deploy
         run: echo "simulando o deploy com sucesso"
-
-
