@@ -19,7 +19,7 @@ jobs:
         run: yarn
 
       - name: Checando padronização do código
-        run: yarn lint
+        run: npx eslint .
 
   unidade:
     runs-on: ubuntu-latest
