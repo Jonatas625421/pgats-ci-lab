@@ -36,10 +36,10 @@ jobs:
       - name: Executando testes de unidade
         run: yarn test
  
-e2e-tests:
-  runs-on: ubuntu-latest
+  e2e-tests:
+   runs-on: ubuntu-latest
 
-  steps: 
+   steps: 
     # clone do projeto
     - uses: actions/checkout@v4
 
