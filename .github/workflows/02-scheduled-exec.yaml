@@ -1,4 +1,3 @@
-
 # CI de Nível 02 - Disparo Agendad0
 
 # Nome do nosso 'pipeline'
@@ -11,7 +10,7 @@ on:
     - cron: '0 16 * * 4'
 
 # Trabalhos/tarefas dentro do pipeline = jobs
-jobs: 
+jobs:
   e2e-tests:
     # Máquina que o job vai executar
     runs-on: ubuntu-latest
@@ -23,7 +22,7 @@ jobs:
 
       # Instalação do Node
       - uses: actions/setup-node@v4
-        with: 
+        with:
           node-version: 22.x
 
       # Instalação do Yarn
