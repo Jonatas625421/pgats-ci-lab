@@ -16,14 +16,14 @@ jobs:
         run: npm install -g yarn
 
       - name: Instalando dependências
-        run: yarn  
+        run: yarn
 
       - name: Checando padronização do código
         run: yarn lint
 
   unidade:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
 
@@ -31,14 +31,14 @@ jobs:
         run: npm install -g yarn
 
       - name: Instalando dependências
-        run: yarn  
+        run: yarn
 
       - name: Executando testes de unidade
         run: yarn test
 
   e2e-tests:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
 
